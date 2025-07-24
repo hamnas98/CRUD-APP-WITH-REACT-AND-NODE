@@ -1,6 +1,6 @@
 # Node
 node_modules/
-.env
+server/.env
 
 # React
 client/node_modules/
