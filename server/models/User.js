@@ -2,14 +2,16 @@ import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema(
-    {
-        name : {type : string, require: true},
-        email : {type : string, require : true, unique : true},
-        password : {type : string, require : true},
-        profileImage : {type: string,default : ''}
-    },
-    {timestamps: true}
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    profileImage: { type: String, default: '' },
+  },
+  { timestamps: true }
 );
+
+
 
 // hashing password before saving DB
 userSchema.pre('save', async (next) => {
@@ -26,3 +28,6 @@ userSchema.pre('save', async (next) => {
 userSchema.method.matchPassword = async (enteredPassword) => {
     return await bcrypt.compare(enteredPassword,this.password)
 };
+
+const User = mongoose.model('User', userSchema);
+export default User;

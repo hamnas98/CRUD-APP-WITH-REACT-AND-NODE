@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 
 const adminSchema = new mongoose.Schema(
-    {
-        name : {type : string, require: true},
-        email : {type : string, require : true, unique : true},
-        password : {type : string, require : true},
-        profileImage : {type: string,default : ''}
-    },
-    {timestamps: true}
+      {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    profileImage: { type: String, default: '' },
+  },
+  { timestamps: true }
 );
 
 // hashing password before saving DB
@@ -26,3 +26,5 @@ adminSchema.pre('save', async (next) => {
 adminSchema.method.matchPassword = async (enteredPassword) => {
     return await bcrypt.compare(enteredPassword,this.password)
 };
+const Admin = mongoose.model('Admin', adminSchema);
+export default Admin;
