@@ -1,16 +1,16 @@
 import jwt from 'jsonwebtoken'
 
-const genereteAccessToken = (payload) => {
-    return jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET,{
+const generateAccessToken = (payload) => {
+    return jwt.sign(payload,process.env.JWT_ACCESS_TOKEN_SECRET,{
         expiresIn : '15m'
     })
 }
 
-const genereteRefreshToken = (payload) => {
-    return jwt.sign(payload,process.env.REFRESH_TOKEN_SECRET,{
+const generateRefreshToken = (payload) => {
+    return jwt.sign(payload,process.env.JWT_REFRESH_TOKEN_SECRET,{
         expiresIn : '7d'
     })
 }
 
 
-export {genereteAccessToken, genereteRefreshToken}
+export {generateAccessToken, generateRefreshToken}
