@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const adminSchema = new mongoose.Schema(
       {
-    name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    profileImage: { type: String, default: '' },
   },
   { timestamps: true }
 );
@@ -22,7 +20,7 @@ adminSchema.pre('save', async function (next) {
 });;
 
 // comparing password during login
-adminSchema.method.matchPassword = async function (enteredPassword) {
+adminSchema.methods.matchPassword  = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 

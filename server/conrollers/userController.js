@@ -1,5 +1,5 @@
-import User from '../../models/User.js'
-import { generateAccessToken, generateRefreshToken } from '../../utils/generateToken.js'
+import User from '../models/User.js'
+import { generateAccessToken, generateRefreshToken } from '../utils/generateToken.js'
 
 const signUpUser = async (req,res) => {
     
@@ -83,4 +83,26 @@ const loginUser = async (req,res) => {
     }
 }
 
-export {signUpUser,loginUser}
+const getUserDashboard = async (req,res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if(!user) {
+            return res.status(404).json({messege: 'User not found'})
+        }
+        res.json({
+            message: 'User dashboard fetched successfully',
+            user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            profileImage: user.profileImage,
+            createdAt: user.createdAt,
+        },
+    });
+    } catch (error) {
+        console.error('Dashboard error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+export {signUpUser,loginUser,getUserDashboard}
