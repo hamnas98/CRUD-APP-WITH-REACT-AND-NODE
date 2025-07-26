@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { generateAccessToken } from '../utils/generateToken'
+import { generateAccessToken } from '../utils/generateToken.js'
 
 const refreshAccessToken =  (req,res) => {
     
