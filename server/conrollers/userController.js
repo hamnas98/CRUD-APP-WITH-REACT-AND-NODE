@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+
 import { generateAccessToken, generateRefreshToken } from '../utils/generateToken.js'
 
 const signUpUser = async (req,res) => {
@@ -120,7 +121,22 @@ const logout = (req, res) => {
   res.status(200).json({ message: 'Logged out successfully' });
 };
 
-const uplaodImage = async  () => {
+const uploadImage = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    console.log("api called")
 
-}
-export {signUpUser,loginUser,getUserDashboard,uplaodImage,logout}
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.profileImage = `/uploads/${req.file.filename}`;
+    await user.save();
+
+    res.json({ message: 'Image uploaded', user });
+  } catch (err) {
+    console.error('Upload error:', err);
+    res.status(500).json({ message: 'Image upload failed' });
+
+  }
+};
+
+export {signUpUser,loginUser,getUserDashboard,logout,uploadImage}

@@ -25,7 +25,7 @@ export const uploadProfileImage = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       })
-      return res.data.user // assuming backend returns updated user
+      return res.data.user 
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || 'Image upload failed')
     }

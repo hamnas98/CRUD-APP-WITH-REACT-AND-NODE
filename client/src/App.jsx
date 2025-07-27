@@ -6,6 +6,7 @@ import Signup from "./pages/Signup"
 import UserDashboard from "./pages/UserDashboard"
 // import AdminDashboard from "./AdminDashboard"
 import ProtectedRoute from '../src/routes/ProtetedRoutes'
+import AdminLogin from "./pages/AdminLogin"
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
+        <Route path="/admin/login" element = {<AdminLogin/>}></Route>
         {/* Protected Admin Route
         <Route
           path="/admin-dashboard"

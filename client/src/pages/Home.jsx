@@ -10,6 +10,8 @@ const Home = () => {
   const isLoggedIn = Boolean(isAuthenticated && user);
   const userName = user?.name || 'User';
   const userEmail = user?.email || '';
+  const userProfile = user?.profileImage? `${import.meta.env.VITE_SERVER_URL || 'http://localhost:5000'}${user.profileImage}`: null;
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -45,7 +47,7 @@ const Home = () => {
               ) : (
                 <div className="relative group">
                   <button className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face&auto=format" alt="User Avatar" className="w-8 h-8 rounded-full border-2 border-gray-200" />
+                    <img src={userProfile? userProfile : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face&auto=format'} alt="User Avatar" className="w-8 h-8 rounded-full border-2 border-gray-200" />
                     <div className="hidden sm:block text-left">
                       <p className="text-sm font-medium text-gray-900">{userName}</p>
                       <p className="text-xs text-gray-500">{userEmail}</p>
@@ -59,7 +61,7 @@ const Home = () => {
                   <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="p-4 border-b border-gray-100">
                       <div className="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=48&h=48&fit=crop&crop=face&auto=format" alt="User Avatar" className="w-12 h-12 rounded-full border-2 border-gray-200" />
+                        <img src={userProfile? userProfile : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face&auto=format'} alt="User Avatar" className="w-12 h-12 rounded-full border-2 border-gray-200" />
                         <div>
                           <p className="font-medium text-gray-900">{userName}</p>
                           <p className="text-sm text-gray-500">{userEmail}</p>
