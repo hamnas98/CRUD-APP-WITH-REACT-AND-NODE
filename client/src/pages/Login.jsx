@@ -28,6 +28,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const newErrors = {};
     Object.entries(formData).forEach(([field, value]) => {
@@ -38,8 +39,6 @@ const Login = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      // Clear Redux errors only when submitting valid form
-      dispatch(clearError());
       
       console.log('Form submitted:', formData);
       dispatch(loginUser(formData))
@@ -48,13 +47,10 @@ const Login = () => {
           navigate('/');
         })
         .catch((err) => {
-          // Don't set local errors - let Redux handle it
           console.log('Login failed:', err);
         });
     }
   };
-
-  // Simple input change handler - don't clear errors on every keystroke
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
@@ -74,7 +70,7 @@ const Login = () => {
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
           
-          {/* Display Redux error if exists */}
+          {/* Display Redux error if it is there*/}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
               <p className="text-red-600 text-sm">{error}</p>

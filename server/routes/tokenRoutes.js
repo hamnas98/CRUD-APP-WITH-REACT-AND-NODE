@@ -1,9 +1,9 @@
 import express from "express";
-import { refreshAccessToken } from "../conrollers/tokenController.js";
+import { refreshAccessToken } from "../controllers/tokenController.js";
 
 
 const router = express.Router();
 
-router.post('/refersh-token', refreshAccessToken)
+router.get('/refresh-token', refreshAccessToken);
 
 export default router;

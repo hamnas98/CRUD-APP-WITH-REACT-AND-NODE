@@ -86,6 +86,17 @@ const deleteUser = async (req, res) => {
 
 const editUser = async (req, res) => {
   try {
+    const { email } = req.body;
+
+    // Check if email is being updated to another existing user's email
+    if (email) {
+      const existing = await User.findOne({ email });
+
+      if (existing && existing._id.toString() !== req.params.id) {
+        return res.status(400).json({ message: 'Email is already in use by another user' });
+      }
+    }
+
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     }).select('-password');
@@ -95,10 +106,13 @@ const editUser = async (req, res) => {
     }
 
     res.json({ message: 'User updated', user: updatedUser });
+
   } catch (err) {
+    console.error('Edit user error:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;

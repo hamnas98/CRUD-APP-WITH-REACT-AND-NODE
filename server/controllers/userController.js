@@ -31,7 +31,7 @@ const signUpUser = async (req,res) => {
         });
 
         res.status(201).json({
-            messege : 'Logn Successful',
+            message : 'Logn Successful',
             accessToken,
             user : {
                 _id:user._id,
@@ -83,7 +83,6 @@ const loginUser = async (req, res) => {
     });
 
   } catch (error) {
-    console.log
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
   }

@@ -32,8 +32,8 @@ const Home = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">AppName</h1>
-                <p className="text-xs text-gray-500 hidden sm:block">Your Digital Solution</p>
+                <h1 className="text-xl font-bold text-gray-900">CRUD APP</h1>
+                <p className="text-xs text-gray-500 hidden sm:block"></p>
               </div>
             </div>
 

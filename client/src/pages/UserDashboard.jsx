@@ -19,13 +19,11 @@ const UserDashboard = () => {
     const file = e.target.files[0]
     if (!file) return
 
-    // Validate file type
+
     if (!file.type.startsWith('image/')) {
       alert('Please select an image file')
       return
     }
-
-    // Validate file size (5MB limit)
     if (file.size > 5 * 1024 * 1024) {
       alert('File size should be less than 5MB')
       return
@@ -33,7 +31,7 @@ const UserDashboard = () => {
 
     setSelectedFile(file)
 
-    // Create preview URL
+
     const reader = new FileReader()
     reader.onload = (e) => {
       setPreviewImage(e.target.result)
@@ -48,10 +46,9 @@ const UserDashboard = () => {
     formData.append('image', selectedFile)
 
     dispatch(uploadProfileImage(formData)).then(() => {
-      // Clear preview after successful upload
+
       setPreviewImage(null)
       setSelectedFile(null)
-      // Reset file input
       if (fileInputRef.current) {
         fileInputRef.current.value = ''
       }
@@ -66,15 +63,13 @@ const UserDashboard = () => {
     }
   }
 
-  // Fixed image URL construction
   const getProfileImageUrl = (profileImage) => {
     if (!profileImage) return null
     const baseUrl = import.meta.env.VITE_SERVER_URL || 'http://localhost:5000'
-    // Check if profileImage already contains full URL or just path
+
     return profileImage.startsWith('http') ? profileImage : `${baseUrl}${profileImage}`
   }
 
-  // Get the image to display (preview or current profile image)
   const userProfileImage = getProfileImageUrl(profile?.profileImage)
   const displayImage = previewImage || userProfileImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face&auto=format'
   const hasImage = profile?.profileImage || previewImage

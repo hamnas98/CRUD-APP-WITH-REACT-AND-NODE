@@ -13,11 +13,12 @@ export const loginUser = createAsyncThunk(
       return res.data;
     } catch (err) {
       console.error(err)
-      console.log(err.response.data.message)
+      console.log(err.response.data.message);
       return rejectWithValue(err.response.data.message || 'User Login failed');
     }
   }
 );
+
 
 // user signup
 export const registerUser = createAsyncThunk(
@@ -50,8 +51,6 @@ export const loginAdmin = createAsyncThunk(
 
 
 
-
-// refresh token
 export const refreshToken = createAsyncThunk(
   'auth/refreshToken',
   async (_, { rejectWithValue }) => {

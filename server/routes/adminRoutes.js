@@ -1,5 +1,5 @@
 import express from "express";
-import { getAdminDashboard, loginAdmin, deleteUser, createUser, editUser, getAllUsers, logout } from "../conrollers/adminController.js";
+import { getAdminDashboard, loginAdmin, deleteUser, createUser, editUser, getAllUsers, logout } from "../controllers/adminController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 import { verifyAdmin } from "../middleware/verifyAdmin.js";
 import uploads from '../utils/multer.js';
