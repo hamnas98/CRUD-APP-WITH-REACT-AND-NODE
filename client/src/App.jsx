@@ -4,7 +4,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import UserDashboard from "./pages/UserDashboard"
-// import AdminDashboard from "./AdminDashboard"
+import AdminDashboard from "./pages/adminDashboard"
 import ProtectedRoute from '../src/routes/ProtetedRoutes'
 import AdminLogin from "./pages/AdminLogin"
 
@@ -26,15 +26,14 @@ const App = () => {
           }
         />
         <Route path="/admin/login" element = {<AdminLogin/>}></Route>
-        {/* Protected Admin Route
         <Route
-          path="/admin-dashboard"
+          path="/admin/dashboard"
           element={
             <ProtectedRoute adminOnly={true}>
               <AdminDashboard />
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   )

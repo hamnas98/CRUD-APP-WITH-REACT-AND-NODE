@@ -1,12 +1,12 @@
-import {  createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/axios';
+import api from "../../api/axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-
+//fetch all users
 export const fetchAllUsers = createAsyncThunk(
   'admin/fetchAllUsers',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await api.get('/admin/dashboard');
+      const res = await api.get('/admin/users');
       return res.data.users;
     } catch (err) {
       return rejectWithValue('Failed to fetch users');
@@ -14,32 +14,7 @@ export const fetchAllUsers = createAsyncThunk(
   }
 );
 
-export const editUser = createAsyncThunk(
-  'admin/editUser',
-  async (userId, { rejectWithValue }) => {
-    try {
-      await api.delete(`/admin/users/${userId}`);
-      return userId;
-    } catch (err) {
-      return rejectWithValue('Failed to edit user');
-    }
-  }
-);
-
-
-export const createUserByAdmin = createAsyncThunk(
-  "admin/createUserByAdmin",
-  async (userData, { rejectWithValue }) => {
-    try {
-      const res = await axiosInstance.post("/admin/create-user", userData);
-      return res.data;
-    } catch (err) {
-      return rejectWithValue(err.response?.data?.message || "Error");
-    }
-  }
-);
-
-
+//delete
 export const deleteUser = createAsyncThunk(
   'admin/deleteUser',
   async (userId, { rejectWithValue }) => {
@@ -48,6 +23,33 @@ export const deleteUser = createAsyncThunk(
       return userId;
     } catch (err) {
       return rejectWithValue('Failed to delete user');
+    }
+  }
+);
+
+
+// createUser
+export const createUserByAdmin = createAsyncThunk(
+  "admin/createUser",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const res = await api.post("/admin/create-user", userData); // changed from axiosInstance to api
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || "Error");
+    }
+  }
+);
+
+//  updateUser
+export const updateUser = createAsyncThunk(
+  'admin/updateUser',
+  async ({ userId, updatedData }, { rejectWithValue }) => {
+    try {
+      const response = await api.put(`/admin/users/${userId}`, updatedData); // changed from axiosInstance to api
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || 'Update failed');
     }
   }
 );

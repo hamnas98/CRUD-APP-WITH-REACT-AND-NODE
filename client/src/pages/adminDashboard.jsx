@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllUsers, deleteUser, createUserByAdmin, updateUser } from '../../features/admin/adminSlice';
+import { fetchAllUsers, deleteUser, createUserByAdmin, updateUser } from '../features/admin/adminThunk.js'
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const { users, loading, error } = useSelector(state => state.admin);
   
-  // State management
+  // States
   const [search, setSearch] = useState('');
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editUser, setEditUser] = useState(null);
   const [deleteUserId, setDeleteUserId] = useState(null);
 
-  // Fetch users on component mount
+  // Fetch users on component mount/
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
   // Get profile image URL
   const getProfileImageUrl = (profileImage) => {
     if (!profileImage) return null;
-    const baseUrl = import.meta.env.VITE_SERVER_URL || 'http://localhost:5000';
+    const baseUrl = import.meta.env.VITE_SERVER_URL 
     return profileImage.startsWith('http') ? profileImage : `${baseUrl}${profileImage}`;
   };
 
